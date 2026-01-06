@@ -883,11 +883,6 @@ position: absolute; /* This keeps it from pushing icons */
 }
 
 @media (max-width: 769px) {
-	 .navbar h1{
-	  margin-left:auto;
-	  margin-right:auto;
-	 }
-
 	 	 .featured-grid{
 	 		 	  display:flex;
 	 	  align-items:center;
@@ -899,42 +894,22 @@ position: absolute; /* This keeps it from pushing icons */
 	 }
 }
 
-/* --- 1336px RESPONSIVE BREAKPOINT --- */
-@media (max-width: 1336px) {
-    .desktop-nav, .nav-icons {
+@media (max-width: 678px){
+	     .desktop-nav, .nav-icons {
         display: none !important; /* Hide desktop links */
     }
 
-    #myMenu {
+	     #myMenu {
         display: block !important; /* Show your SVG icon */
     }
+}
 
-    .navbar {
-        height: auto !important;
-        padding: 15px 0;
-    }
-
-	 .navbar h1{
-	 	  margin-left:auto;
-		  margin-right:auto;
-	 }
+/* --- 1336px RESPONSIVE BREAKPOINT --- */
+@media (max-width: 1336px) {
 
 	 .navbar.shrunk h1{
 	 	  font-size:1.5rem
 	 }
-
-    .nav-content {
-        flex-direction: column !important; /* Stack Logo on top of Search/Menu */
-        gap: 15px;
-    }
-
-    .mobile-controls {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 10px;
-    }
 
     .search-container {
         position: static !important;
@@ -1003,4 +978,5 @@ position: absolute; /* This keeps it from pushing icons */
 .sidebar-links a:hover{
 	 font-weight:800;
 	 
+
 }
