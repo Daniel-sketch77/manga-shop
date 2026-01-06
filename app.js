@@ -44,6 +44,14 @@ const closeOrderModal = () => {
     }
 };
 
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    setTimeout(() => {
+        loader.style.opacity = '0';
+        setTimeout(() => loader.style.display = 'none', 500);
+    }, 1000); // Shows logo for 1 second
+});
+
 
 
 if (orderCloseBtn) orderCloseBtn.addEventListener('click', closeOrderModal);
@@ -158,5 +166,96 @@ if (heroBtn && featuredSect) {
             behavior: 'smooth', 
             block: 'start' 
         });
+    });
+}
+
+/* --- SCROLL REVEAL LOGIC --- */
+const scrollReveal = () => {
+    // This finds every element with the 'reveal' class
+    const revealElements = document.querySelectorAll('.reveal');
+    
+    revealElements.forEach(el => {
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+        const elementVisible = 150; // How many pixels until it triggers
+
+        if (elementTop < windowHeight - elementVisible) {
+            el.classList.add('active');
+        }
+    });
+};
+
+// Listen for scrolling
+window.addEventListener('scroll', scrollReveal);
+
+// Run once on load in case cards are already in view
+window.addEventListener('load', scrollReveal);
+
+const backToTopBtn = document.getElementById('backToTop');
+
+// Only run this if the button actually exists on the page
+if (backToTopBtn) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+/* --- ORDER FORM SUBMISSION --- */
+const orderForm = document.querySelector('.modal-content form');
+
+if (orderForm) {
+    orderForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Prevents the page from refreshing
+
+        // 1. Change button text to show progress
+        const submitBtn = orderForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerText;
+        submitBtn.innerText = "Processing...";
+        submitBtn.disabled = true;
+
+        // 2. Simulate a "Save" delay
+        setTimeout(() => {
+            alert("Order Confirmed! Thank you for your purchase.");
+            
+            // 3. Reset and Close
+            orderForm.reset();
+            submitBtn.innerText = originalText;
+            submitBtn.disabled = false;
+            
+            const modal = document.getElementById('modalOverlay');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }, 1500); 
+    });
+}
+
+/* --- AUTH FORMS SUBMISSION --- */
+// We don't use 'const' here because they were already declared at the top of the file
+// Just use the IDs directly to be safe
+const currentLoginForm = document.getElementById('form-login');
+const currentSignupForm = document.getElementById('form-signup');
+
+if (currentLoginForm) {
+    currentLoginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert("Login Successful!");
+        document.getElementById('authOverlay').classList.remove('is-visible');
+    });
+}
+
+if (currentSignupForm) {
+    currentSignupForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert("Account Created!");
     });
 }
