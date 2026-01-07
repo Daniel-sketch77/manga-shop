@@ -259,3 +259,36 @@ if (currentSignupForm) {
         alert("Account Created!");
     });
 }
+/* --- AUTH FORM SUBMISSION HANDLERS --- */
+
+// Handle Login Button Click
+if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Stop page refresh
+        
+        alert("Login Successful! Scrolling restored.");
+
+        // 1. Hide the modal
+        authOverlay.classList.remove('is-visible');
+
+        // 2. FIX SCROLLING: Bring the scrollbar back
+        document.body.style.overflow = 'auto';
+        
+        loginForm.reset();
+    });
+}
+
+// Handle Register Button Click
+if (signupForm) {
+    signupForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Stop page refresh
+        
+        alert("Account Created! Now you can log in.");
+
+        // Switch to the Login Tab automatically
+        loginTab.click(); 
+        
+        // Safety: ensure scrolling works if you decide to close it here
+        // document.body.style.overflow = 'auto';
+    });
+}
